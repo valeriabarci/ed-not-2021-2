@@ -56,7 +56,7 @@ print(f"Passadas: {passadas}, comparações: {comps}, trocas: {trocas}")
 from data.nomes_desord import nomes
 from time import time
 
-nomes_parcial = nomes[:100000]   # Usa apenas os primeiros 30 mil nomes
+nomes_parcial = nomes[:30000]   # Usa apenas os primeiros 30 mil nomes
 
 ini = time()
 bubble_sort(nomes_parcial)
