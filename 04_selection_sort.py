@@ -74,7 +74,7 @@ ini = time()
 selection_sort(nomes)
 fim = time()
 
-#print(nomes_parcial)
+#print(nomes_parcial)'
 print(nomes)
 print(f"Tempo: {fim - ini}")
 print(f"Passadas: {passadas}, comparações: {comps}, trocas: {trocas}")
