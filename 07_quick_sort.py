@@ -81,17 +81,18 @@ comps = 0
 trocas = 0
 
 ini = time()
-tracemalloc.start()     # Inicia a medição de consumo de memória
+# tracemalloc.start()     # Inicia a medição de consumo de memória
 
 quick_sort(nomes)
 
-mem_atual, mem_pico = tracemalloc.get_traced_memory()
+#mem_atual, mem_pico = tracemalloc.get_traced_memory()
 
 fim = time()
 
 print(nomes)
 print(f"Tempo: {fim - ini}")
 print(f"Passadas: {passadas}, comps: {comps}, trocas: {trocas}")
-print(f"Pico de memória: {mem_pico / 1024 / 1024}MB")
-tracemalloc.stop()       # Finaliza a medição do consumo de memória
+#print(f"Pico de memória: {mem_pico / 1024 / 1024}MB")
+# tracemalloc.stop()       # Finaliza a medição do consumo de memória
 
+print('The CPU usage is: ', psutil.cpu_percent(4))
