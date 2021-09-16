@@ -26,18 +26,18 @@ class FormaGeometrica():
 
         #print(f"base: {base} ({type(base)}), altura: {altura} ({type(altura)})")
 
-        if type(base) not in [int, float] or base <= 0:
-            raise Exception("A base deve ser numérica e maior que zero.")
-        elif type(altura) not in [int, float] or altura <= 0:
-            raise Exception("A altura deve ser numérica e maior que zero.")
-        elif tipo not in["R", "T", "E"]:
-            raise Exception("O tipo deve ser R, T ou E.")
+        # if type(base) not in [int, float] or base <= 0:
+        #     raise Exception("A base deve ser numérica e maior que zero.")
+        # elif type(altura) not in [int, float] or altura <= 0:
+        #     raise Exception("A altura deve ser numérica e maior que zero.")
+        # elif tipo not in["R", "T", "E"]:
+        #     raise Exception("O tipo deve ser R, T ou E.")
 
 
-        # Ajustando o valor dos atributos privados
-        self.__base = base
-        self.__altura = altura
-        self.__tipo = tipo
+        # Ajustando o valor inicial via setters das propriedades
+        self.base = base
+        self.altura = altura
+        self.tipo = tipo
 
     # Getter é um método que possibilita saber o valor de um atributo
     # privado do lado de fora da classe
@@ -54,7 +54,7 @@ class FormaGeometrica():
 
     # property "esconde" as funções getter e setter dentro do nome de
     # um atributo, tornando mais simples a manipulação do objeto
-    base = property(__get_base, __set_base)
+    # base = property(__get_base, __set_base)
 
     # Essas linhas começadas com @ são chamadas "decorators"
     # Os decorators instruem o Python a criar uma property com
@@ -69,11 +69,35 @@ class FormaGeometrica():
             raise Exception("* A altura deve ser numérica e maior que zero")
         self.__altura = valor
 
+    @property
+    def tipo(self):
+        return self.__tipo
+    
+    @tipo.setter
+    def tipo(self, valor):
+        if valor not in ["R", "T", "E"]:
+            raise Excepection("* O tipo deve ser R, T ou E.")
+        self.__tipo = valor
+
+    # Um MÉTODO é uma função que, inserida dentro de uma classe, pode
+    # acessar seus dados (ATRIBUTOS) e manipulá-los
+    def calc_area(self):
+        if self.tipo == "R":    # Retângulo
+            return self.base * self.altura
+        elif self.tipo == "T":  # Triângulo
+            return self.base * self.altura / 2
+        else: # Elipse, tipo "E"
+            return (self.base / 2) * (self.altura / 2) * pi
+        
 ################################################################
 
 # Criando objetos (instanciando) a partir da classe
 retangulo1 = FormaGeometrica(15, 10, "R")   # Chama o __init__
 triangulo1 = FormaGeometrica(6.4, 9, "T")
+
+print(f"Área de uma forma {retangulo1.tipo} de {retangulo1.base}x{retangulo1.altura}:{retangulo1.calc_area()}")
+
+print(f"Área de uma forma {triangulo1.tipo} de {triangulo1.base}x{triangulo1.altura}:{triangulo1.calc_area()}")
 
 #retangulo1.__base = 5
 # retangulo1.set_base(9.6)
@@ -83,7 +107,7 @@ retangulo1.base = 9.6     # vai executar set_base da classe
 # retangulo1.__base = 0
 # triangulo1.__tipo = "Yadayada"
 
-#problematico = FormaGeometrica(7.2, 5.4, "T")
+# problematico = FormaGeometrica(7.2, 8, "E")
 
 print(f"[retangulo1] base: {retangulo1.base}")  # vai executar o getter
 
