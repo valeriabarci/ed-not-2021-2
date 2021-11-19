@@ -241,58 +241,23 @@ class BinarySearchTree:
 
         # 4.4: remoção do nodo de grau 2
 
+        # Precisamos encontrar:
+        # a) O MAIOR nodo da subárvore ESQUERDA; *ou*
+        # b) O MENOR nodo da subárvore DIREITA
+        
+        # Nossa opção: usar o maior nodo da subárvore esquerda
+        new_root = self.__max_node(root.left)
+        # Ou: new_root = self.__min_node(root.right)
+        
+        # Copia o valor do nodo encontrado para o nodo que está
+        # sendo "removido"
+        root.data = new_root.data
+        
+        # Exclui o valor duplicado que está na subárvore esquerda
+        # (de onde veio o valor de new_root)
+        root.left = self.__remove_node(root.left, new_root.data)
+        # Ou: root.right = self.__remove_node(root.right, new_root.data)
+        
+        return root
 
 ######################################################################
-
-arvore = BinarySearchTree()
-
-arvore.insert(43)
-arvore.insert(27)
-arvore.insert(64)
-arvore.insert(36)
-arvore.insert(10)
-arvore.insert(0)
-
-print(arvore.to_str())
-
-em_ordem = []
-
-def insere_em_ordem(val):
-    em_ordem.append(val)
-
-#arvore.in_order_traversal(insere_em_ordem)
-arvore.in_order_traversal(lambda val: em_ordem.append(val))
-#arvore.in_order_traversal(lambda val: print(val))
-
-print('Percurso em-ordem:', em_ordem)
-
-sumario = BinarySearchTree()
-
-sumario.insert('2')
-sumario.insert('1')
-sumario.insert('3')
-sumario.insert('1.1')
-sumario.insert('3.1')
-sumario.insert('2.1')
-sumario.insert('2.1.1')
-
-em_ordem = []
-sumario.in_order_traversal(lambda val: em_ordem.append(val))
-print('Sumário em-ordem:', em_ordem)
-
-pre_ordem = []
-sumario.pre_order_traversal(lambda val: pre_ordem.append(val))
-print('Sumário pré-ordem:', pre_ordem)
-
-pre_ordem = []
-arvore.pre_order_traversal(lambda val: pre_ordem.append(val))
-print('Árvore pré-ordem:', pre_ordem)
-
-pos_ordem = []
-arvore.post_order_traversal(lambda val: pos_ordem.append(val))
-print('Árvore pós-ordem:', pos_ordem)
-
-existe36 = arvore.exists(36)
-existe51 = arvore.exists(51)
-existe64 = arvore.exists(64)
-print(f'36: {existe36}, 51: {existe51}, 64: {existe64}')
