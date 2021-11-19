@@ -74,7 +74,7 @@ class DoublyLinkedList:
     def index(self, val):
         # Encontra a posição do meio da lista. Se o resultado for
         # fracionário, considera o próximo número inteiro
-        meio = math.ceil(self.count / 2)
+        meio = math.ceil(self.__count / 2)
 
         # Inicializa dois nodos, um com a cabeça e outro com a cauda
         # da lista
@@ -82,7 +82,8 @@ class DoublyLinkedList:
         node2 = self.__tail
 
         # Contador que vai até a metade da lista
-        for pos in range(0, meio + 1):
+        for pos in range(0, meio):
+            #print(f'>> Pos: {pos}, node1: {node1.data}, node2: {node2.data}')
             if(node1.data == val): return pos # retorna a posição encontrada
             if(node2.data == val): return self.__count - 1 - pos  # retorna posição retroativa
             node1 = node1.next  # node1 anda para frente
@@ -235,54 +236,3 @@ class DoublyLinkedList:
         return "[ " + string + f" ], count: {self.__count}"
 
 #######################################################
-
-lista = DoublyLinkedList()
-print(lista.to_str())
-
-# Inserção em lista vazia
-lista.insert(0, 'Fusca')
-print(lista.to_str())
-
-# Inserção no início da lista
-lista.insert(0, 'Chevette')
-print(lista.to_str())
-
-# Inserção no final da lista
-lista.insert(3, 'Maverick')
-print(lista.to_str())
-
-# Inserção no final da lista (2)
-lista.insert(4, 'Opala')
-print(lista.to_str())
-
-# Inserção no final da lista (3)
-lista.insert(5, 'Del Rey')
-print(lista.to_str())
-
-# Inserção em posição intermediária
-lista.insert(1, 'Gol')
-print(lista.to_str())
-
-# Inserção em posição intermediária
-lista.insert(4, 'Corcel')
-print(lista.to_str())
-
-# Remoção do primeiro nodo
-removido = lista.remove(0)
-print(f"Removido primeira posição: {removido}")
-print(lista.to_str())
-
-# Remoção do último nodo
-removido = lista.remove(lista.count() - 1)
-print(f"Removido última posição: {removido}")
-print(lista.to_str())
-
-# Remoção de posição intermediária
-removido = lista.remove(2)
-print(f"Removido posição 2: {removido}")
-print(lista.to_str())
-
-# Consulta o último nodo
-ultimo = lista.peek_tail()
-print(f"Último nodo consultado: {ultimo}")
-print(lista.to_str())
